@@ -1,14 +1,34 @@
 {
-  "APA": {
-    "text": "Name (Year, Month Date). Title. Site. URL",
-    "regexes": [
-      "Name",
-      "Year",
-      "Month",
-      "Date",
-      "Title",
-      "Site",
-      "URL"
-    ]
-  }
+  "APA": [
+    {
+      "text": "Lastname, Initials (Year, Month Date). *Title*. Site. URL",
+      "requirements": [
+        "Lastname", "Initials", "Year", "Month", "Date", "Title", "Site", "URL"
+      ]
+    },
+    {
+      "text": "Group. (Year, Month Date). *Title*. Site. URL",
+      "requirements": [
+        "Group", "Year", "Month", "Date", "Title", "Site", "URL"
+      ]
+    },
+    {
+      "text": "*Title*. (Year, Month Date). Site. Retrieved rMonth rDate, rYear, from URL",
+      "requirements": [
+        "Title", "Year", "Month", "Date", "Site", "rMonth", "rDate", "rYear", "URL"
+      ]
+    },
+    {
+      "text": "Lastname, Initials (n.d.). *Title*. Site. URL",
+      "requirements": [
+        "Lastname", "Initials", "Title", "Site", "URL"
+      ]
+    },
+    {
+      "text": "Group. (n.d.). *Title*. Site. URL",
+      "requirements": [
+        "Group", "Title", "Site", "URL"
+      ]
+    }
+  ]
 }
