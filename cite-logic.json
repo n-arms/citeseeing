@@ -1,3 +1,14 @@
 {
-  "APA": "author. date"
+  "APA": {
+    "text": "Name (Year, Month Date). Title. Site. URL",
+    "regexes": [
+      "Name",
+      "Year",
+      "Month",
+      "Date",
+      "Title",
+      "Site",
+      "URL"
+    ]
+  }
 }

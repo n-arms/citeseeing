@@ -2,11 +2,13 @@ import json
 
 def cite(data, style):
     with open("cite-logic.json") as config_file:
-        template = json.load(config_file)[style]
-    print("loaded template", template)
-    for key in data:
-        print("processing key", key, "with template", template)
-        template = template.replace(key, data[key])
+        format = json.load(config_file)[style]
+    template = format["text"]
+    for regex in format["regexes"]:
+        if regex in data:
+            template = template.replace(regex, data[regex])
+        else:
+            template = template.replace(regex, "")
     return template
 
-print(cite_file({"author": "john smith"}, "APA"))
+print(cite({"Name": "Smith J.", "Year": "0000", "Month": "0", "Date": "0", "Title": "A treatise on the evolution of yaks", "Site": "yaks global", "URL": "yaks-global.com"}, "APA"))
