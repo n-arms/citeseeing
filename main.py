@@ -45,8 +45,8 @@ class GUIFrame(Frame):
         self.citation_box['state'] = 'disabled'
         self.citation_box.grid(row=len(self.entries), column=0, columnspan=2)
         self.citation_box.tag_config("normal", font="arial 15")
+        self.citation_box.tag_config("italic", font="arial 15 italic")
         self.citation_box.tag_add("normal", "1.0", "end")
-
 
         self.cite_button = Button(self, text="cite", command=self.generate_citation, font="arial 15")
         self.cite_button.grid(row=len(self.entries)+1, column=0)
@@ -60,6 +60,33 @@ class GUIFrame(Frame):
         self.citation_box.delete('1.0', 'end')
         self.citation_box.insert("end", cite(data, "APA") or "please enter more data")
         self.citation_box.tag_add("normal", "1.0", "end")
+        self.citation_box['state'] = 'disabled'
+        self.parse_italics()
+
+    def parse_italics(self):
+        i = 0
+        in_italics = False
+        start = 0
+        text = self.citation_box.get("1.0", "end")
+        tags = []
+        while (i < len(text)):
+            if text[i] == '*':
+                if in_italics == False:
+                    in_italics = True
+                    text = text[:i] + text[i+1:]
+                    start = i
+                else:
+                    in_italics = False
+                    text = text[:i] + text[i+1:]
+                    tags.append((start, i))
+            else:
+                i+=1
+        self.citation_box['state'] = 'normal'
+        self.citation_box.delete('1.0', 'end')
+        self.citation_box.insert("1.0", text)
+        self.citation_box.tag_add('normal', '1.0', 'end')
+        for i in tags:
+            self.citation_box.tag_add('italic', f"1.{i[0]}", f"1.{i[1]}")
         self.citation_box['state'] = 'disabled'
 
 
